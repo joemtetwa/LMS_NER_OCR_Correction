@@ -1,0 +1,71 @@
+LMS AI and NLP Technical Test
+
+1.	Background to the task
+
+LMS have millions of mortgage related documents in PDF format and wish to develop a bespoke Named Entity Recognition model (using the BERT family of transformer models) to extract specific data items and information from these PDFs.  The extracted entities will be used in further downstream tasks. 
+
+The first stage in our process is to convert the PDFs to actual plain text, and so we have been experimenting with various Python packages, including IBM’s Docling package.  See here for information about Docling:
+
+https://pypi.org/project/docling/
+https://github.com/docling-project
+
+Unfortunately, after reviewing a small sample of outputs, we have discovered various OCR errors are introduced by Docling when converting PDFs to text.
+
+As we operate in a highly regulated environment with significant financial consequences to us, our clients and to home buyers if any of the extracted information is incorrect, we need to develop methods of identifying and correcting errors wherever possible, particularly those introduced by OCR and conversion processes.  
+
+2.	Instructions for the task
+
+We have provided an Excel workbook with a toy dataset of OCR text (164 rows of data and 5 columns) that has been extracted from two sample PDFs.  The two PDFs relate to the same mortgage case and relate to the same individuals.  The first two rows of the dataset are:
+
+row_id	doc_id	ocr_para_id	ocr_para_type	ocr_para_text
+1	1	1	Title	Your     Mortgage     Offer
+2	1	2	Paragraph	Mr Mickey Mouse and Ms Minnie M0use
+
+Where:
+-	row_id – represents the index within the entire dataset.
+-	doc_id – represents the original PDF document the text relates to.  There are two documents in the dataset, so doc_id will be either 1 or 2.
+-	ocr_para_id – represents the paragraph number within each document.
+-	ocr_para_type – represents whether the text in the original PDF is likely to be a “Title” (i.e. a heading) or a “Paragraph” (i.e. normal prose or text).
+-	ocr_para_text – the text from the Docling OCR engine.
+
+Although all the data is fake, with all sensitive information removed or fictionalised, the nature of the errors is based on real Docling outputs.  In fact, the errors are a simplified subset of the real errors we have encountered so far.
+
+Your task is to write Python code (a single Jupyter Notebook please) that can correct as many of the identified OCR errors as reasonably possible.  When tackling the problem you may make the following assumptions:
+
+-	All the text is in English and the character set is UTF-8.
+-	All the original PDFs are of high image quality and contain only typed text.
+-	The original text is error free, i.e. there are no typos or grammatical errors in the original PDFs.  The source of all the errors is the Docling OCR.
+-	You may assume that the information provided by doc_id, ocr_para_id and ocr_para_type are 100% correct.  The only column that contains errors is ocr_para_text.
+
+	You are free to use any Python library, any computer science algorithm, any machine learning or deep learning methods you believe to be most appropriate for the task.  However, you may not use any generative AI  or Large Language Model such as OpenAI’s family of GPT models or any equivalent type of LLM such as Mistral, Llama, Gemini etc.  In addition, you may not use ChatGPT or other LLM to write code for the problem.  Although you cannot use any LLM, you can use any encoder transformer-based language model (e.g. BERT, RoBERTa etc), and you can use any NLP framework or ecosystem e.g. spaCy, NLTK etc.  
+
+	If your code uses a Large Language Model or ChatGPT has been used to write any part of your submission, your submission will be rejected.  
+
+3.	The deliverables
+
+You are to produce two deliverables:
+
+1)	A Python script (preferably a single Jupyter notebook) that solves the problem.  Your script should output a single Pandas dataframe (with header row) comprising the original data plus one additional column called “cleaned_text” showing your revised text for each row.  In other words, the first two rows of the resulting dataframe should look something like:
+
+row_id	<other columns omitted>	ocr_para_text	cleaned_text
+1		Your     Mortgage     Offer	Your Mortgage Offer
+2		Mr Mickey Mouse and Ms Minnie M0use	Mr Mickey Mouse and Ms Minnie Mouse
+
+Do note that we are not looking for a fully robust or production-grade solution that can solve all the errors within the text.  However, we do expect you to attempt to solve as many of the errors as possible within a reasonable time period.
+
+What we are primarily interested in is your coding style, the choice of Python libraries and the overall approach and methods you have used.
+ 
+
+2)	A PowerPoint presentation of at most 10 slides which summarises:
+
+i)	Your approach, assumptions and any limitations.
+
+ii)	Any data analysis of the toy dataset.
+
+iii)	How your approach would differ when applied to our real dataset which contains millions of rows of OCR extracted text from millions of PDFs.  You will need to justify your reasoning.
+
+Please note that the slide limit of 10 is an absolute maximum and includes the title slide and any appendix slides.  
+
+As a guide, we recommend that you do not spend more than a few hours on this task in total.
+
+You must provide your Python code for the coding challenge by 10am on Tuesday 10th June 2025.  Any submission received after this deadline will be discounted and regrettably you will be eliminated from the interview process. 
