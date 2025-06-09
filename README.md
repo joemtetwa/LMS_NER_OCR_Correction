@@ -188,4 +188,3 @@ The system produces:
 3. Run cells sequentially to process the mortgage documents
 4. Review the cleaned text and confidence scores in the final output
 
-The system is designed to handle real-world OCR imperfections while maintaining high accuracy in entity recognition and text correction.
